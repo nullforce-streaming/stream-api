@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace StreamApis.Models
 {
-    public class Quote
+    public class QuoteContainer
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -14,13 +13,7 @@ namespace StreamApis.Models
         [JsonProperty("category")]
         public string Category { get; set; }
 
-        [JsonProperty("quote")]
-        public string QuoteString { get; set; }
-
-        [JsonProperty("who")]
-        public string Who { get; set; }
-
-        [JsonProperty("when")]
-        public DateTimeOffset When { get; set; }
+        [JsonProperty("quotes")]
+        public Quote[] Quotes { get; set; }
     }
 }

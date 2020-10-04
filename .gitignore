@@ -3,6 +3,8 @@
 **/bin
 **/obj
 
+*.csproj.user
+
 # Ignore Nuke build folders
 .tmp/
 output/

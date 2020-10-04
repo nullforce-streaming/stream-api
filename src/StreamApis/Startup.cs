@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -49,6 +50,11 @@ namespace StreamApis
 
             services.AddControllers();
 
+            // Setup Cosmos DB
+            string serviceEndpoint = Configuration["CosmosDb:Account"];
+            string authKey = Configuration["CosmosDb:Key"];
+
+            services.AddSingleton<CosmosClient>(new CosmosClient(serviceEndpoint, authKey));
             services.AddSingleton<IQuotesRepository, QuotesRepository>();
         }
 
