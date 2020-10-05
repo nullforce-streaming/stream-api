@@ -1,26 +1,14 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 
 namespace StreamApis.Models
 {
     public class Quote
     {
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
-        [JsonProperty("tenant")]
+        public int Id { get; set; }
         public string Tenant { get; set; }
-
-        [JsonProperty("category")]
         public string Category { get; set; }
-
-        [JsonProperty("quote")]
         public string QuoteString { get; set; }
-
-        [JsonProperty("who")]
         public string Who { get; set; }
-
-        [JsonProperty("when")]
         public DateTimeOffset When { get; set; }
     }
 }

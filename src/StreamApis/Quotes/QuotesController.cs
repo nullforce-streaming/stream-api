@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StreamApis.Models;
+using StreamApis.Quotes;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -43,6 +45,29 @@ namespace Nullforce.StreamApis.Quotes
                     Quote = q.QuoteString,
                 }).ToArray()
             };
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> PostQuotes(AddQuoteViewModel viewModel)
+        {
+            var userid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1";
+
+            if (ModelState.IsValid)
+            {
+                var quote = new Quote
+                {
+                    Tenant = userid,
+                    Category = viewModel.Category,
+                    QuoteString = viewModel.Quote,
+                    Who = viewModel.Who,
+                    When = viewModel.When,
+                };
+
+                await _quotesRepository.AddQuote(quote);
+            }
+
+            return new OkResult();
         }
 
         [Authorize]

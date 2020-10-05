@@ -7,6 +7,7 @@ namespace StreamApis.Models
     {
         Task<List<string>> GetCategories(string tenant);
 
+        Task AddQuote(Quote quote);
         Task<List<Quote>> GetQuotes(string tenant);
         Task<List<Quote>> GetQuotes(string tenant, string category);
     }
